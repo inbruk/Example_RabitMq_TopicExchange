@@ -19,9 +19,9 @@ namespace Producer
 
         static String GenerateCarRoutingKey()
         {
-            String brand = brands[rnd.Next(0,3)];
-            String color = colors[rnd.Next(0,3)];
-            String fuel = fuels[rnd.Next(0,3)];
+            String brand = brands[rnd.Next(0,4)];
+            String color = colors[rnd.Next(0,4)];
+            String fuel = fuels[rnd.Next(0,4)];
 
             if (brand == brands[2])
                 fuel = fuels[2];
