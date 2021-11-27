@@ -10,6 +10,8 @@ namespace Producer
 {
     class Program
     {
+        const String exchangeName = "topic_logs";
+
         private static readonly List<String> brands = new List<String>() { "BMW", "Audi", "Tesla", "Hyundai" };
         private static readonly List<String> colors = new List<String>() { "red", "green", "blue", "white" };
         private static readonly List<String> fuels = new List<String>() { "gasoline", "gas", "electric", "diesel" };
@@ -45,11 +47,11 @@ namespace Producer
                     using (var connection = factory.CreateConnection())
                     using (var channel = connection.CreateModel())
                     {
-                        channel.ExchangeDeclare("topic_logs", ExchangeType.Topic);
+                        channel.ExchangeDeclare(exchangeName, ExchangeType.Topic);
 
                         var message = $"'{routingKey}' message from producer N:{counter++}";
                         var body = Encoding.UTF8.GetBytes(message);
-                        channel.BasicPublish(exchange: "direct_logs", routingKey: routingKey, basicProperties: null, body: body);
+                        channel.BasicPublish(exchange: exchangeName, routingKey: routingKey, basicProperties: null, body: body);
 
                         Console.WriteLine(message);
                     }
